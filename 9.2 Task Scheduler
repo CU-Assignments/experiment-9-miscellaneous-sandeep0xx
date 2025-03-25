@@ -1,0 +1,13 @@
+from collections import Counter
+
+class Solution:
+    def leastInterval(self, tasks: list[str], n: int) -> int:
+        task_counts = Counter(tasks)  # Count frequency of each task
+        max_freq = max(task_counts.values())  # Maximum frequency of any task
+        max_count = sum(1 for v in task_counts.values() if v == max_freq)  # Count tasks with max frequency
+
+        # Calculate required time
+        required_time = (max_freq - 1) * (n + 1) + max_count
+
+        # Final answer is the max between required_time and total tasks
+        return max(required_time, len(tasks))
